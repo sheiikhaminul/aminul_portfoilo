@@ -11,7 +11,6 @@ import {
   Phone,
   X,
   Download as DownloadIcon,
-  ExternalLink,
 } from "lucide-react";
 import portraitImage from "@/assets/sheikh-aminul-potrait2.jpg";
 
@@ -381,10 +380,6 @@ const HeroSection: React.FC = () => {
             <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-background/60 backdrop-blur">
               <div className="font-semibold">Resume — Sheikh Aminul Islam</div>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" onClick={openResumeInNewTab}>
-                  <ExternalLink className="w-4 h-4 mr-1" />
-                  Open in new tab
-                </Button>
                 <Button variant="hero" size="sm" onClick={downloadResume}>
                   <DownloadIcon className="w-4 h-4 mr-1" />
                   Download
