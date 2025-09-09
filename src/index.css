@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Portfolio Design System for BI Developer */
+
+@layer base {
+  :root {
+    /* Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 222 15% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 15% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 15% 12%;
+
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 163 94% 24%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 163 94% 24%;
+
+    --radius: 0.75rem;
+
+    /* Portfolio specific tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(0 0% 100%) 100%);
+    --accent-gradient: linear-gradient(135deg, hsl(163 94% 24%) 0%, hsl(163 94% 30%) 100%);
+    --card-shadow: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -1px hsl(222 47% 11% / 0.06);
+    --glow-accent: 0 0 20px hsl(163 94% 24% / 0.3);
+    
+    /* Typography */
+    --font-heading: 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Mode - Inspired by the reference design */
+    --background: 222 25% 8%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 25% 10%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 25% 10%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222 25% 8%;
+
+    --secondary: 222 25% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 25% 12%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 163 94% 24%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 25% 15%;
+    --input: 222 25% 15%;
+    --ring: 163 94% 24%;
+
+    /* Dark mode specific tokens */
+    --hero-gradient: linear-gradient(135deg, hsl(222 25% 8%) 0%, hsl(222 25% 5%) 100%);
+    --accent-gradient: linear-gradient(135deg, hsl(163 94% 24%) 0%, hsl(163 94% 30%) 100%);
+    --card-shadow: 0 4px 6px -1px hsl(222 25% 5% / 0.3), 0 2px 4px -1px hsl(222 25% 5% / 0.2);
+    --glow-accent: 0 0 30px hsl(163 94% 24% / 0.4);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-[var(--font-body)] scroll-smooth;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-[var(--font-heading)];
+  }
+}
+
+@layer components {
+  /* Hero Section Styles */
+  .hero-gradient {
+    background: var(--hero-gradient);
+  }
+
+  .accent-gradient {
+    background: var(--accent-gradient);
+  }
+
+  .card-elevated {
+    box-shadow: var(--card-shadow);
+  }
+
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+
+  /* Portfolio specific animations */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .stagger-animation > * {
+    animation: fadeInUp 0.6s ease-out;
+    animation-fill-mode: both;
+  }
+
+  .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Smooth scrolling for navigation */
+html {
+  scroll-behavior: smooth;
+}
