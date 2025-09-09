@@ -144,7 +144,7 @@ const HeroSection: React.FC = () => {
                   {/* Tech cards */}
                   <Button
                     variant="outline"
-                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 text-foreground hover:text-foreground"
                   >
                     <img
                       src={SqlIcon}
@@ -158,7 +158,7 @@ const HeroSection: React.FC = () => {
 
                   <Button
                     variant="outline"
-                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 text-foreground hover:text-foreground"
                   >
                     <img
                       src={ExcelIcon}
@@ -172,7 +172,7 @@ const HeroSection: React.FC = () => {
 
                   <Button
                     variant="outline"
-                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 text-foreground hover:text-foreground"
                   >
                     <img
                       src={TableauIcon}
@@ -186,7 +186,7 @@ const HeroSection: React.FC = () => {
 
                   <Button
                     variant="outline"
-                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
+                    className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50 text-foreground hover:text-foreground"
                   >
                     <img
                       src={PythonIcon}
