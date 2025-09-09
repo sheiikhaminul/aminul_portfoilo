@@ -9,6 +9,9 @@ import {
   GraduationCap,
   IdCard,
   Phone,
+  X,
+  Download as DownloadIcon,
+  ExternalLink,
 } from "lucide-react";
 import portraitImage from "@/assets/sheikh-aminul-potrait2.jpg";
 
@@ -22,32 +25,31 @@ import PythonIcon from "@/assets/icons/python.png";
 const RESUME_URL = "/Sheikh_Aminul_Islam-resume.pdf";
 
 const HeroSection: React.FC = () => {
+  const [resumeOpen, setResumeOpen] = React.useState(false);
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
-  const openResume = async () => {
+  // Open inline viewer
+  const openResumeViewer = () => setResumeOpen(true);
+  const closeResumeViewer = () => setResumeOpen(false);
+
+  // Open in new tab (browser’s PDF viewer shows download button too)
+  const openResumeInNewTab = () => {
+    window.open(RESUME_URL, "_blank", "noopener,noreferrer");
+  };
+
+  // Force download
+  const downloadResume = async () => {
     const href = RESUME_URL;
 
-    // If running inside an iframe/sandbox, navigate same tab (avoids popup blocking)
-    try {
-      const isInIframe = window.top !== window.self;
-      if (isInIframe) {
-        window.location.href = href;
-        return;
-      }
-    } catch {
-      window.location.href = href;
-      return;
-    }
-
-    // Try to fetch and force-download
     try {
       const res = await fetch(href);
       if (!res.ok) {
-        // If not found or blocked, just open it in a new tab
-        window.open(href, "_blank", "noopener,noreferrer");
+        // Fallback: open in same tab if blocked
+        window.open(href, "_self");
         return;
       }
       const blob = await res.blob();
@@ -65,15 +67,42 @@ const HeroSection: React.FC = () => {
     }
   };
 
+  // Lock body scroll when modal is open + close on ESC
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeResumeViewer();
+    };
+    if (resumeOpen) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", onKey);
+    } else {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [resumeOpen]);
+
   return (
     <section
       id="home"
-      className="min-h-screen hero-gradient flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-[var(--nav-h)] lg:pt-0 scroll-mt-[var(--nav-h)]"
+      className="
+        relative min-h-screen hero-gradient
+        flex items-start lg:items-center justify-center
+        px-4 sm:px-6 lg:px-8
+        pt-[calc(var(--nav-h)+1rem)]
+        sm:pt-[calc(var(--nav-h)+2rem)]
+        lg:pt-[calc(var(--nav-h)+2.5rem)]
+        pb-12
+        scroll-mt-[calc(var(--nav-h)+0.5rem)]
+      "
     >
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Profile Card (floating + visible in dark) */}
-          <div className="lg:col-span-4 flex justify-center lg:justify-start mt-4 sm:mt-6 lg:mt-0">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start lg:items-center">
+          {/* Profile Card (subbox) */}
+          <div className="lg:col-span-4 flex justify-center lg:justify-start mt-8 sm:mt-10 lg:mt-6 xl:mt-8">
             <div className="bg-card/20 backdrop-blur-md rounded-3xl p-8 border border-border/40 dark:border-white/10 max-w-sm w-full ring-1 ring-accent/20 shadow-xl shadow-black/10 dark:shadow-black/40 hover:shadow-2xl hover:shadow-accent/25 transform-gpu transition-all duration-300">
               {/* Name and Designation at top */}
               <div className="mb-6 flex justify-between items-center">
@@ -91,7 +120,7 @@ const HeroSection: React.FC = () => {
                     alt="Sheikh Aminul Islam"
                     className="w-32 h-32 rounded-2xl object-cover ring-4 ring-accent/20"
                   />
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full animate-pulse"></div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-accent rounded-full animate-pulse" />
                 </div>
               </div>
 
@@ -112,7 +141,7 @@ const HeroSection: React.FC = () => {
                 </h2>
 
                 <div className="grid grid-cols-2 gap-3">
-                  {/* Tech cards: scale + glow; no green bg on hover */}
+                  {/* Tech cards */}
                   <Button
                     variant="outline"
                     className="h-24 w-full rounded-xl flex flex-col items-center justify-center gap-1.5 transform-gpu transition-all duration-200 hover:scale-105 hover:bg-transparent hover:shadow-[0_8px_24px_rgba(16,185,129,0.18)] hover:ring-2 hover:ring-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50"
@@ -170,7 +199,7 @@ const HeroSection: React.FC = () => {
                   </Button>
                 </div>
 
-                {/* Tools & Skills button: no color change; subtle glow on hover */}
+                {/* Tools & Skills */}
                 <Button
                   variant="hero"
                   size="lg"
@@ -233,11 +262,10 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Main Content (shifted slightly right) */}
+          {/* Main Content */}
           <div className="lg:col-span-8 text-center lg:text-left space-y-8 stagger-animation lg:pl-8 xl:pl-12">
-            {/* Highlighted Heading Box with green glow + Unfold More inside */}
+            {/* Highlighted Heading Box */}
             <div className="relative rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm p-5 shadow-lg shadow-accent/20">
-              {/* Say hi from badge */}
               <span className="inline-block text-xs sm:text-sm tracking-wide text-accent bg-accent/10 rounded-full px-3 py-1 ring-1 ring-accent/30 drop-shadow-[0_0_10px_rgba(16,185,129,0.35)]">
                 Hi from,
               </span>
@@ -249,7 +277,7 @@ const HeroSection: React.FC = () => {
                 Business Intelligence Developer • Data Analyst
               </p>
 
-              {/* Unfold More inside */}
+              {/* Unfold More */}
               <div
                 className="mt-6 w-fit mx-auto flex flex-col items-center space-y-2 text-muted-foreground cursor-pointer group"
                 onClick={() => scrollToSection("#experience")}
@@ -277,9 +305,9 @@ const HeroSection: React.FC = () => {
               </p>
             </div>
 
-            {/* Action Buttons (above Stats) */}
+            {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button variant="hero" size="lg" onClick={openResume}>
+              <Button variant="hero" size="lg" onClick={openResumeViewer}>
                 <FileText className="w-4 h-4 mr-2" />
                 Download Resume
               </Button>
@@ -293,7 +321,7 @@ const HeroSection: React.FC = () => {
               </Button>
             </div>
 
-            {/* Stats (now 3 items in one row on md+) */}
+            {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-2xl mx-auto lg:mx-0">
               <div>
                 <div className="text-3xl sm:text-4xl font-bold text-accent mb-2">
@@ -333,8 +361,51 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Simple Background Elements */}
-      <div className="absolute bottom-10 right-10 w-32 h-32 bg-accent/5 rounded-full blur-3xl"></div>
-      <div className="absolute top-20 left-10 w-24 h-24 bg-accent/5 rounded-full blur-2xl"></div>
+      <div className="absolute bottom-10 right-10 w-32 h-32 bg-accent/5 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-10 w-24 h-24 bg-accent/5 rounded-full blur-2xl" />
+
+      {/* Resume Viewer Modal */}
+      {resumeOpen && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+          onClick={closeResumeViewer}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Resume viewer"
+        >
+          <div
+            className="w-full max-w-5xl h-[85vh] bg-card rounded-2xl shadow-2xl border border-border/50 overflow-hidden flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-background/60 backdrop-blur">
+              <div className="font-semibold">Resume — Sheikh Aminul Islam</div>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" onClick={openResumeInNewTab}>
+                  <ExternalLink className="w-4 h-4 mr-1" />
+                  Open in new tab
+                </Button>
+                <Button variant="hero" size="sm" onClick={downloadResume}>
+                  <DownloadIcon className="w-4 h-4 mr-1" />
+                  Download
+                </Button>
+                <Button variant="ghost" size="icon" onClick={closeResumeViewer} aria-label="Close">
+                  <X className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Viewer */}
+            <div className="flex-1 bg-muted/20">
+              <iframe
+                src={`${RESUME_URL}#toolbar=1&zoom=page-width`}
+                title="Resume PDF"
+                className="w-full h-full border-0"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
