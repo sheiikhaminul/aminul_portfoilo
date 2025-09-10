@@ -35,7 +35,7 @@ const CompanyLogo: React.FC<{ company: string; size?: number }> = ({
 };
 
 const ExperienceSection: React.FC = () => {
-  const companyName = "Radiant Data System Ltd.";
+  const companyName = "Radiant Data Systems Ltd.";
 
   return (
     <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-muted/30">
