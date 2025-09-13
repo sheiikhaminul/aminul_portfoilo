@@ -3,7 +3,7 @@ import { Briefcase, Calendar, MapPin, TrendingUp } from "lucide-react";
 
 // Map company names to logo image paths
 const COMPANY_LOGOS: Record<string, string> = {
-  "Radiant Data System Ltd.": "/logos/radiant.jpg",
+  "Radiant Data Systems Ltd.": "/logos/radiant.jpg",
 };
 
 // Company logo with fallback to Briefcase icon
