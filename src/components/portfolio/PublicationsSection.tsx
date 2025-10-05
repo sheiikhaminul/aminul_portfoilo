@@ -50,8 +50,8 @@ const PublicationsSection: React.FC = () => {
         "YOLOv8",
         "CNN",
       ],
-      link: "https://journal.uinjkt.ac.id/index.php/aism",
-      status: "Accepted",
+      link: "https://journal.uinjkt.ac.id/index.php/aism/article/view/46658/17863",
+      status: "Published",
     },
   ];
 
